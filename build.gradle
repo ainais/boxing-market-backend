@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.10'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.ainais'
+version = '0.0.1-SNAPSHOT'
+description = 'boxing-market'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // 1. Web: API 요청 처리
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // 2. Persistence: DB 저장 및 관리
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.h2database:h2' // 실습용 인메모리 DB
+
+    // 3. Validation: 도메인 데이터 무결성 검증 (필수!)
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // 4. Utils: 코드 간소화
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // 5. Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // Swagger (Springdoc)
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
