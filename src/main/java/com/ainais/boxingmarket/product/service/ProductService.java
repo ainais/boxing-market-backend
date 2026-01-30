@@ -32,4 +32,20 @@ public class ProductService {
         product.changePrice(newPrice);
         // JPA Dirty Checking에 의해 자동 저장됨
     }
+
+    @Transactional
+    public void addStock(Long productId, int quantity) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("상품이 없습니다."));
+
+        product.addStock(quantity);
+    }
+
+    @Transactional
+    public void removeStock(Long productId, int quantity) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("상품이 없습니다."));
+
+        product.removeStock(quantity);
+    }
 }
