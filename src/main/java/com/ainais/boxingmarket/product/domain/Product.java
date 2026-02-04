@@ -39,6 +39,9 @@ public class Product {
 
     // 재고 증가
     public void addStock(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("추가할 수량은 0 이상이어야 합니다.");
+        }
         this.stockQuantity += quantity;
     }
 
